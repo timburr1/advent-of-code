@@ -14,12 +14,10 @@ with open('input.txt') as fp:
 list1 = sorted(list1)
 list2 = sorted(list2)
 
-#print(list1)
-#print(list2)
+total_similaryity = 0
 
-total_distance = 0
+for n in list1:
+    similarity = int(n) * list2.count(n)
+    total_similaryity += similarity
 
-for n in range(len(list1)):
-    total_distance += abs(int(list1[n]) - int(list2[n]))
-
-print(total_distance)
+print(total_similaryity)

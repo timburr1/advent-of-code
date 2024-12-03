@@ -18,10 +18,9 @@ def evaluate(input):
         for mul in re.findall('mul\([0-9]+,[0-9]+\)', do):
             total += calculate_value(mul)
 
-    #todo: at the end of each line, figure out whether do() or don't() is active
     return total
 
-with open('input.txt') as fp:
+with open('concat.txt') as fp:
     sum = 0
     for line in fp:
         #print(evaluate(line))

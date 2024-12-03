@@ -1,10 +1,24 @@
+import re
+
+def calculate_value(string):
+    vals = string.replace('mul(', '').replace(')', '').split(',')
+    product = int(vals[0]) * int(vals[1])
+    #print(str(product))
+    return product
 
 def evaluate(input):
     total = 0
 
-    return str(total)    
+    #print(re.findall('mul\([0-9]+,[0-9]+\)', input))
 
-with open('03/input.txt') as fp:
+    for mul in re.findall('mul\([0-9]+,[0-9]+\)', input):
+        total += calculate_value(mul)
+
+    return total
+
+with open('input.txt') as fp:
+    sum = 0
     for line in fp:
-        print(evaluate(line))
-
+        #print(evaluate(line))
+        sum += evaluate(line)
+    print(str(sum))

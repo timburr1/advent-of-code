@@ -7,7 +7,7 @@ def insert(str):
     list1.append(vals[0])
     list2.append(vals[1].replace('\n', ''))
 
-with open('input.txt') as fp:
+with open('2024/01/input.txt') as fp:
     for line in fp:
         insert(line)
 

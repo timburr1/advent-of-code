@@ -16,7 +16,7 @@ def evaluate(input):
 
     return total
 
-with open('input.txt') as fp:
+with open('2024/03/input.txt') as fp:
     sum = 0
     for line in fp:
         #print(evaluate(line))

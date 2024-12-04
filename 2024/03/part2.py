@@ -20,7 +20,7 @@ def evaluate(input):
 
     return total
 
-with open('concat.txt') as fp:
+with open('2024/03/concat.txt') as fp:
     sum = 0
     for line in fp:
         #print(evaluate(line))

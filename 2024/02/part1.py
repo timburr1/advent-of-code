@@ -40,7 +40,7 @@ def check(str):
     #print('Safe: ' + str)
     safe_count += 1
 
-with open('input.txt') as fp:
+with open('2024/02/input.txt') as fp:
     for line in fp:
         check(line)
 

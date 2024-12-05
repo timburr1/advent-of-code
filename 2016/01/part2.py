@@ -3,7 +3,8 @@ directions = []
 facing = 'N'
 current_x = 0
 current_y = 0
-visited = {}
+visited = [[False for x in range(1000)] for y in range(1000)]
+visited [500][500] = True
 
 def turn_right():
     global facing
@@ -31,6 +32,7 @@ def turn_left():
 
 def move(instruction):
     global current_x, current_y, visited
+    OFFSET = 500
 
     if instruction.startswith('R'):
         turn_right()
@@ -40,32 +42,44 @@ def move(instruction):
     distance = int(instruction[1:])
 
     if facing == 'N':
-        current_y += distance
+        for i in range(distance):
+            current_y += 1
+            if visited[current_x + OFFSET][current_y + OFFSET] == True:
+                print(str(abs(current_x) + abs(current_y)))
+                return
+            else:
+                visited[current_x + OFFSET][current_y + OFFSET] = True
     elif facing == 'E':
-        current_x += distance
+        for i in range(distance):
+            current_x += 1
+            if visited[current_x + OFFSET][current_y + OFFSET] == True:
+                print(str(abs(current_x) + abs(current_y)))
+                return
+            else:
+                visited[current_x + OFFSET][current_y + OFFSET] = True
     elif facing == 'S':
-        current_y -= distance
+        for i in range(distance):
+            current_y -= 1
+            if visited[current_x + OFFSET][current_y + OFFSET] == True:
+                print(str(abs(current_x) + abs(current_y)))
+                return
+            else:
+                visited[current_x + OFFSET][current_y + OFFSET] = True
     else: # W
-        current_x -= distance
+        for i in range(distance):
+            current_x -= 1
+            if visited[current_x + OFFSET][current_y + OFFSET] == True:
+                print(str(abs(current_x) + abs(current_y)))
+                return
+            else:
+                visited[current_x + OFFSET][current_y + OFFSET] = True
     
-    key = str(current_x) + ', ' + str(current_y)
+    #print(str(visited))
 
-    if visited.get(key, False) == True:
-        print(str(abs(current_x) + abs(current_y)))
-    else:
-        visited[key] = True
-        print(str(visited))
-
-with open('2016/01/test4.txt') as fp:
+with open('2016/01/input.txt') as fp:
     for line in fp:
         for dir in line.split(', '):
             directions.append(dir)
 
 for dir in directions:
     move(dir)
-
-# print('x distance: ' + str(x_dist_travelled))
-# print('y distance: ' + str(y_dist_travelled))
-
-#total_distance = abs(x_dist_travelled) + abs(y_dist_travelled)
-#print(str(total_distance))

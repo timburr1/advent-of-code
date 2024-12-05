@@ -1,8 +1,9 @@
 
 directions = []
 facing = 'N'
-x_dist_travelled = 0
-y_dist_travelled = 0
+current_x = 0
+current_y = 0
+visited = {}
 
 def turn_right():
     global facing
@@ -29,7 +30,7 @@ def turn_left():
         facing = 'S'
 
 def move(instruction):
-    global x_dist_travelled, y_dist_travelled
+    global current_x, current_y, visited
 
     if instruction.startswith('R'):
         turn_right()
@@ -39,13 +40,21 @@ def move(instruction):
     distance = int(instruction[1:])
 
     if facing == 'N':
-        y_dist_travelled += distance
+        current_y += distance
     elif facing == 'E':
-        x_dist_travelled += distance
+        current_x += distance
     elif facing == 'S':
-        y_dist_travelled -= distance
+        current_y -= distance
     else: # W
-        x_dist_travelled -= distance
+        current_x -= distance
+    
+    key = str(current_x) + ', ' + str(current_y)
+
+    if visited.get(key, False) == True:
+        print(str(abs(current_x) + abs(current_y)))
+    else:
+        visited[key] = True
+        print(str(visited))
 
 with open('2016/01/test4.txt') as fp:
     for line in fp:
@@ -58,6 +67,5 @@ for dir in directions:
 # print('x distance: ' + str(x_dist_travelled))
 # print('y distance: ' + str(y_dist_travelled))
 
-total_distance = abs(x_dist_travelled) + abs(y_dist_travelled)
-
-print(str(total_distance))
+#total_distance = abs(x_dist_travelled) + abs(y_dist_travelled)
+#print(str(total_distance))

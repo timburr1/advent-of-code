@@ -1,6 +1,7 @@
 
 grid = []
 this_grid = []
+visited = {}
 facing = 'N'
 start_x = 0
 start_y = 0
@@ -8,19 +9,26 @@ x = 0
 y = 0
 
 def check_obstacle_location(a, b):
-    global grid, this_grid, facing, start_x, x, start_y, y
+    global grid, this_grid, facing, start_x, x, start_y, y, visited
+
+    if grid[b][a] == '#':
+        # there is already an obstacle here
+        return False
 
     this_grid = grid.copy()
     this_grid[b] = this_grid[b][:a] + '#' + this_grid[b][a+1:]
     
+    visited = {}
+    facing = 'N'
     x = start_x
     y = start_y
 
     m = move()
     while not m:
-        # Todo: check for loop
+        if visited.get((x,y)) != None and {facing} <= visited.get((x, y)):
+            return True
         m = move()
-
+        
     return False
 
 def rotate():
@@ -34,9 +42,19 @@ def rotate():
     else: # W
         facing = 'N'
 
+def visit(x, y, f):
+    global visited
+
+    if visited.get((x,y)) == None:
+        visited[(x,y)] = {f}
+    else:
+        visited[(x,y)].add(f)
+
 def move():
-    global this_grid, facing, x, y
+    global this_grid, visited, facing, x, y
     
+    visit(x, y, facing)
+
     if (facing == 'N' and y == 0) or (facing == 'E' and x == len(this_grid[y])-1) or (facing == 'S' and y == len(this_grid)-1) or (facing == 'W' and x == 0):
         # reached an edge
         return True
@@ -52,7 +70,7 @@ def move():
             y += 1
         elif facing == 'W':
             x -= 1
-
+    
     return False
 
 def init():

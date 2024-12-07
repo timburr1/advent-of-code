@@ -11,7 +11,7 @@ y = 0
 def check_obstacle_location(a, b):
     global grid, this_grid, facing, start_x, x, start_y, y, visited
 
-    if grid[b][a] == '#':
+    if grid[b][a] == '#' or grid[b][a] == '^':
         # there is already an obstacle here
         return False
 
@@ -82,7 +82,7 @@ def init():
                 start_y = b
                 return
 
-with open('2024/06/test.txt') as fp:    
+with open('2024/06/input.txt') as fp:    
     for line in fp:
         grid.append(line.replace('\n', ''))
 
@@ -92,5 +92,6 @@ count = 0
 for b in range(0, len(grid)):
     for a in range(0, len(grid[b])):
         if check_obstacle_location(a, b) :
+            print(str(a) + ', ' + str(b))
             count += 1
 print(str(count))

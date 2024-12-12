@@ -14,6 +14,9 @@ def add_ingredient(input):
 def score_cookie(a, b, c, d):
     global ingredients
 
+    if ingredients[0][5]*a + ingredients[1][5]*b + ingredients[2][5]*c + ingredients[3][5]*d != 500:
+        return -1
+    
     capacity = max(ingredients[0][1]*a + ingredients[1][1]*b + ingredients[2][1]*c + ingredients[3][1]*d, 0)
     durability = max(ingredients[0][2]*a + ingredients[1][2]*b + ingredients[2][2]*c + ingredients[3][2]*d, 0)
     flavor = max(ingredients[0][3]*a + ingredients[1][3]*b + ingredients[2][3]*c + ingredients[3][3]*d, 0)
@@ -24,8 +27,6 @@ def score_cookie(a, b, c, d):
 with open('2015/15/input.txt') as fp:    
     for line in fp:
         add_ingredient(line.strip())
-
-# print(str(ingredients))
 
 max_score = -1
 for a in range(0, 101):

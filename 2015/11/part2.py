@@ -1,6 +1,6 @@
 
 letters = 'abcdefghijklmnopqrstuvwxyz'
-password = 'hxbxwxba'
+password = 'hxbxxzaa'
 
 def includes_triple(password):
     for i in range(1, len(password)-1):
@@ -37,7 +37,7 @@ def increment(password):
         idx = letters.find(password[i])
         if idx == 25: #z, need to carry
             password = password[:i] + 'a' + password[i+1:]
-        elif idx == 8 or idx == 11 or idx == 14: # i, l, o
+        elif idx == 7 or idx == 10 or idx == 13: # i, l, o
             password = password[:i] + letters[idx+2] + password[i+1:]
             break
         else:

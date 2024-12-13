@@ -16,11 +16,16 @@ def match(input):
     global clues
 
     s = input.split(' ')
-    # print(str(s))
     for i in range(2, len(s), 2):
         k = s[i].replace(':', '')
         v = int(s[i+1].replace(',', ''))
-        if clues[k] != v:
+        if (k == 'cats' or k == 'trees'):
+            if not clues[k] <= v:
+                return False
+        elif (k == 'pomeranians' or k == 'goldfish'): 
+            if not clues[k] >= v:
+                return False
+        elif clues[k] != v:
             return False
     return True
 

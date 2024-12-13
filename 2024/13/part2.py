@@ -18,8 +18,8 @@ def cost(machine):
     b_button = machine[1]
     target = machine[2]
 
-    for a in range(min(int(target[0] / a_button[0])+1, int(int(target[1] / a_button[1])+1))):
-        for b in range(min(int(target[0] / b_button[0])+1, int(int(target[1] / b_button[1])+1))):
+    for a in range(min(int(target[0] / a_button[0]), int(int(target[1] / a_button[1]))), 1000000000000):
+        for b in range(min(int(target[0] / b_button[0]), int(int(target[1] / b_button[1]))), 1000000000000):
             if a * a_button[0] + b * b_button[0] > target[0]:
                 break
             elif a * a_button[1] + b * b_button[1] > target[1]:

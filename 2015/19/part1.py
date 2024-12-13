@@ -13,10 +13,25 @@ def add_rule(input):
 def react(input):
     global mols, rules
 
-    mols.add(input)
-    # Todo: replace + react
+    skip = False
+    for i in range(len(input)):
+        if skip:
+            skip = False
+            continue
 
-with open('2015/19/test.txt') as file:
+        key = input[i]
+        if i < len(input)-1 and input[i+1].islower():
+            key += input[i+1]
+            skip = True            
+        if rules.get(key) == None:
+            continue
+        for r in rules[key]:
+            if skip:
+                mols.add(input[:i] + r + input[i+2:])
+            else:
+                mols.add(input[:i] + r + input[i+1:])
+
+with open('2015/19/test2.txt') as file:
     for line in file:
         if line.count('=>') > 0:
             add_rule(line.replace('\n', ''))
@@ -25,5 +40,6 @@ with open('2015/19/test.txt') as file:
         else:
             react(line.replace('\n', ''))
 
-print(str(rules))
+# print(str(rules))
+# print(str(mols))
 print(str(len(mols)))

@@ -25,5 +25,5 @@ def count(mem):
     return c
 
 count([1, 0, 14, 14, 12, 12, 10, 10, 8, 8, 6, 6, 4, 3, 2, 1])
-      
+
 assert(count([2, 4, 1, 2]) == 4)

@@ -1,25 +1,24 @@
 
-import hashlib
+def rotate(string, val):
+    letters = 'abcdefghijklmnopqrstuvwxyz'
 
-door_id = 'reyedfim'
-# door_id = 'abc'
-password = ['', '', '', '', '', '', '', '']
-i = 0
-c = 0
+    result = ''
+    for s in string:
+        result += letters[(letters.find(s) + val) % 26]
 
-def hash(i):
-    global door_id
+    return result
 
-    my_string = door_id + str(i)
-    return hashlib.md5(my_string.encode('utf-8')).hexdigest()
+def decrypt(input):
+    i = input.split('[')
+    j = i[0].split('-')
 
-while c < 8:
-    h = hash(i)
-    # print(i)
-    if h.startswith('00000') and ['0', '1', '2', '3', '4', '5', '6', '7'].count(h[5]) == 1 and password[int(h[5])] == '':
-        print(h)
-        password[int(h[5])] = h[6]
-        c += 1
-    i += 1
+    id = int(j[len(j) - 1])
 
-print(password)
+    r = ''
+    for k in range(len(j) - 1):
+        r += rotate(j[k], id) + ' '
+    return str(id) + ': ' + r
+
+with open('2016/04/input.txt') as fp:
+    for line in fp:
+        print(decrypt(line.strip()))
